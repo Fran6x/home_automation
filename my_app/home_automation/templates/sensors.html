@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content_nav %}
+<div class="col-md-2 d-none d-md-block ml-0 pl-0 pr-0 pt-3 sidebar" >
+    <nav class="nav nav-pills flex-sm-column" style="background-color: #38383d; min-height: 80vh" >
+      <a class="nav-link" href="/">Monitor</a>
+      <a class="nav-link" href="/emitters">Emitters</a>
+      <a class="nav-link active" href="/sensors">Sensors</a>
+    </nav>
+  </div>
+
+{% endblock %}
+
+{% block content_main %}
+<form class="form-inline" action="/add_sensor" method="post">
+  <div class="col-auto my-1">
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Sensors</label>
+  </div>
+<div class="col-auto my-1">
+  <select class="custom-select mr-sm-2" name="emitter" id="validationDefault04" required>
+        <option selected disabled>Choose...</option>
+        {% for emitter in emitters %} 
+        <option value="{{ emitter.location }}">{{ emitter.location }}</option>
+        {% endfor %}
+  </select>
+</div>
+<div class="col-auto my-1">
+  <select class="custom-select mr-sm-2"name="type" id="validationDefault04" required>
+          <option selected disabled>Sensor type</option>
+          {% for type in types %}
+          <option value="{{ type.type }}">{{ type.type }}</option>
+          {% endfor %}
+  </select>
+</div>
+<button type="submit" class="btn btn-primary">Add</button>  
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content_nav %}
+
+<div class="col-md-2 d-none d-md-block ml-0 pl-0 pr-0 pt-3 sidebar" >
+    <nav class="nav nav-pills flex-sm-column" style="background-color: #38383d; min-height: 80vh" >
+      <a class="nav-link active" href="/">Monitor</a>
+      <a class="nav-link" href="/emitters">Emitters</a>
+      <a class="nav-link" href="/sensors">Sensors</a>
+     
+    </nav>
+  </div>
+
+
+
+{% endblock %}
+
+{% block content_main %}
+  {% for emitter in emittersRepos.get_all() %}
+    {% include "card.html" %}
+  {% endfor %}  
+{% endblock %}
+

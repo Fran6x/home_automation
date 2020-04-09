@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content_alert %}
+{% if error == 'error' %}
+<div class="alert alert-danger my-0 ml-5 p-1" role="alert">
+  Emitter already exist try another location name
+</div>
+{% elif error == 'ok' %}
+<div class="alert alert-success my-0 ml-5 p-1" role="alert">
+ Emitter sucessfully added
+</div>           
+{% endif %}
+ 
+{% endblock %}
+
+{% block content_nav %}
+<div class="col-md-2 d-none d-md-block ml-0 pl-0 pr-0 pt-3 sidebar" >
+    <nav class="nav nav-pills flex-sm-column" style="background-color: #38383d; min-height: 80vh" >
+      <a class="nav-link" href="/">Monitor</a>
+      <a class="nav-link active" href="/emitters">Emitters</a>
+      <a class="nav-link" href="/sensors">Sensors</a>
+    </nav>
+  </div>
+
+{% endblock %}
+
+
+
+{% block content_main %}
+<form class="form-inline pb-2" action="/add_emitter" method="post">
+<div class="col-auto my-1">
+  <label for="inlineFormCustomSelectPref">Emitter to add</label>
+</div>
+<div class="col-auto my-1">
+  <input type="text" name="location" class="form-control" placeholder="Location" id="validationDefault01" required>  
+</div>  
+<div class="col-auto my-1">
+  <input type="text" name="address" class="form-control" id="formGroupExampleInput" placeholder="address" id="validationDefault01" required>
+</div>  
+<div class="col-auto my-1">
+  <button type="submit" class="btn btn-primary form-control my-1">add</button>
+</div>
+</form>
+
+{% endblock %}
+
+{%  block content_main_seconde %}
+<form class="form-inline pb-2" action="/delete" method="POST">
+  
+    <div class="col-auto my-1">
+    <label for="inlineFormCustomSelect">Emitter to delete</label>
+  </div>
+    <div class="col-auto my-1">
+      
+      <select class="custom-select mr-sm-2" name="select" id="validationDefault04" required>
+        <option selected disabled>Choose...</option>
+        {% for emitter in emitters %}
+        
+        <option value="{{ emitter.id }}">{{ emitter.location }}</option>
+
+        
+        {% endfor %}
+      </select>
+    </div>
+    
+    <div class="col-auto my-1">
+      <button type="submit" class="btn btn-primary">Delete</button>
+    </div>
+  
+</select>
+</form>
+
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content_0 %}
+{% if error == 'error' %}
+<div class="alert alert-danger my-0 ml-5 p-1" role="alert">
+  Emitter already exist try another location name
+</div>
+{% elif error == 'ok' %}
+<div class="alert alert-success my-0 ml-5 p-1" role="alert">
+ Emitter sucessfully added
+</div>           
+{% endif %}
+ 
+{% endblock %}
+
+
+
+{% block content_1 %}
+<form class="form-inline" action="/add_emitter" method="post">
+<div class="col-auto my-1">
+  <label for="inlineFormCustomSelectPref">Emitters</label>
+</div>
+<div class="col-auto my-1">
+  <input type="text" name="location" class="form-control" placeholder="Location" id="validationDefault01" required>  
+</div>  
+<div class="col-auto my-1">
+  <input type="text" name="address" class="form-control" id="formGroupExampleInput" placeholder="address" id="validationDefault01" required>
+</div>  
+<div class="col-auto my-1">
+  <button type="submit" class="btn btn-primary form-control my-1">add</button>
+</div>
+</form>
+
+
+            
+
+
+{% endblock %}
+
+
+
+
+{% block content_2 %}
+<form class="form-inline" action="/add_sensor" method="post">
+  <div class="col-auto my-1">
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Sensors</label>
+  </div>
+<div class="col-auto my-1">
+  <select class="custom-select mr-sm-2" name="emitter" id="validationDefault04" required>
+        <option selected disabled>Choose...</option>
+        {% for emitter in emitters %} 
+        <option value="{{ emitter.location }}">{{ emitter.location }}</option>
+        {% endfor %}
+  </select>
+</div>
+<div class="col-auto my-1">
+  <select class="custom-select mr-sm-2"name="type" id="validationDefault04" required>
+          <option selected disabled>Sensor type</option>
+          {% for type in types %}
+          <option value="{{ type.type }}">{{ type.type }}</option>
+          {% endfor %}
+  </select>
+</div>
+<button type="submit" class="btn btn-primary">Add</button>  
+</form>
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+  <h3>Add Emitter</h3>
+  
+
+  <form action="/add_emitter" method="post">
+
+  <div class="form-group">
+    <label for="formGroupExampleInput" >Location</label>
+    <input type="text" name="location" class="form-control" id="formGroupExampleInput" placeholder="Location">
+  </div>
+
+  <div class="form-group">
+    <label for="formGroupExampleInput" >address</label>
+    <input type="text" name="address" class="form-control" id="formGroupExampleInput" placeholder="address">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add</button>
+
+</form>
+</div>
+<div class="col-sm">
+  <h3>Add Sensor</h3>
+  <form action="/add_sensor" method="post">
+
+  <div class="form-group">
+    <label for="formGroupExampleInput" >Emitter</label>
+    <select class="custom-select mr-sm-2" name="emitter" id="inlineFormCustomSelect">
+        <option selected>Choose...</option>
+        {% for emitter in emitters %}
+        
+        <option value="{{ emitter.location }}">{{ emitter.location }}</option>
+
+        
+        {% endfor %}
+      </select>
+  </div>
+
+    <div class="form-group">
+    <label for="formGroupExampleInput" >Type</label>
+    <select class="custom-select mr-sm-2" name="type" id="inlineFormCustomSelect">
+        <option selected>Choose...</option>
+        {% for type in types %}
+        <option value="{{ type.type }}">{{ type.type }}</option>
+        {% endfor %}
+      </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add</button>
+
+</form>
+</div>
+
+{% endblock %}
+{%  block content_3 %}
+
+<div class="col-sm">
+<form action="/delete" method="POST">
+  <div class="form-row align-items-center">
+    <div class="col-auto my-1">
+    <label for="inlineFormCustomSelect">Emitters</label>
+  </div>
+    <div class="col-auto my-1">
+      
+      <select class="custom-select mr-sm-2" name="select" id="validationDefault04" required>
+        <option selected disabled>Choose...</option>
+        {% for emitter in emitters %}
+        
+        <option value="{{ emitter.id }}">{{ emitter.location }}</option>
+
+        
+        {% endfor %}
+      </select>
+    </div>
+    
+    <div class="col-auto my-1">
+      <button type="submit" class="btn btn-primary">Delete</button>
+    </div>
+  </div>
+</select>
+</form>
+</div>
+
+{% endblock %}
